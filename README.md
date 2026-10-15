@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚡ PokeThorAssistant ⚡
+# PokeThorAssistant
 ### Tactical Pokédex & Real-Time Battle Scout for AYN Thor & Dual-Screen Handhelds
 
 <br />
@@ -16,111 +16,111 @@
 
 <br />
 
-**PokeThorAssistant** es la herramienta táctica definitiva diseñada específicamente para la pantalla inferior de la consola **AYN Thor** y dispositivos Android con formato dual-screen / emulación (Citra, MelonDS, DraStic, RetroArch, etc.). Permite consultar debilidades, calcular sinergias competitivas y recibir asesoría de combate en tiempo real mientras juegas en la pantalla superior.
+**PokeThorAssistant** es una herramienta táctica diseñada para la pantalla inferior de la consola **AYN Thor** y dispositivos Android con formato de doble pantalla o emulación (Citra, MelonDS, DraStic, RetroArch). Permite analizar debilidades, calcular sinergias competitivas y recibir recomendaciones de combate en tiempo real mientras juegas en la pantalla superior.
 
 </div>
 
 ---
 
-## 🚀 Descarga el APK
+## Descarga del APK
 
-Puedes descargar la última versión compilada lista para instalar en tu AYN Thor o cualquier dispositivo Android:
+La versión compilada lista para instalar en consolas AYN Thor y dispositivos Android se encuentra disponible en releases:
 
-👉 **[Descargar PokeThorAssistant.apk (v1.0.0)](https://github.com/Gbriel999/PokeThorAssistant/releases/latest/download/PokeThorAssistant.apk)**
+- **[Descargar PokeThorAssistant.apk (v1.0.0)](https://github.com/Gbriel999/PokeThorAssistant/releases/latest/download/PokeThorAssistant.apk)**
 
 ---
 
-## 🌟 Características Principales
+## Características Principales
 
-### ⚔️ 1. Asesor Táctico de Combate (VS RIVAL)
-¿El rival sacó un Pokémon desconocido y no sabes con qué responder?
-- **Puntuación de 1 a 5 Estrellas (`★★★★★`)**: Evalúa automáticamente qué Pokémon de tu equipo activo tiene la ventaja táctica frente al rival.
-- **Detección de Inmunidades por Habilidad**: Reconoce inmunidades clave como *Levitate* (Tierra), *Flash Fire* (Fuego), *Water Absorb* / *Storm Drain* (Agua) y *Volt Absorb* / *Motor Drive* (Eléctrico).
-- **Alertas de Peligro & STAB**: Advierte si el rival te supera en velocidad (`Speed Tier`), si tus ataques no le hacen daño o si puede noquearte con ataques STAB supereficaces.
-- **Banca / PC Box Compacta**: Sugerencias secundarias de tu reserva para saber a quién rotar a tu equipo si la situación lo amerita.
+### 1. Asesor Táctico de Combate (VS RIVAL)
+Diseñado para situaciones donde el rival lanza un Pokémon desconocido:
+- **Calificación Táctica (1 a 5 estrellas)**: Clasifica cada miembro de tu equipo frente al rival según ventaja de tipo, daño potencial y velocidad relativa.
+- **Detección de Inmunidades por Habilidad**: Reconoce inmunidades clave como Levitate, Flash Fire, Water Absorb, Storm Drain, Volt Absorb y Motor Drive.
+- **Alertas de Peligro y STAB**: Identifica desventajas de velocidad (Speed Tiers), ataques sin efecto e impacto de ataques STAB supereficaces del oponente.
+- **Recomendaciones de PC Box**: Muestra opciones secundarias de reserva en formato compacto para evaluar rotaciones de equipo.
 
-### 📖 2. Base de Datos Offline de 1025 Pokémon (Gen 1 - Gen 9)
-- **100% Offline**: Todo el motor de cálculo y estadísticas funciona sin conexión a internet.
+### 2. Base de Datos Offline de 1025 Pokémon (Gen 1 - Gen 9)
+- **Completamente Offline**: Motor de cálculo, base de datos de especies, movimientos y tablas de tipos sin requerir conexión a internet.
 - **Modelos 3D y Sprites Showdown**: Sprites animados para todas las especies y formas regionales (Galar, Alola, Hisui, Paldea).
-- **Buscador con Filtros por Generación**: Filtrado instantáneo por generaciones con insignias icónicas de cada región (Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar, Paldea).
+- **Filtros por Generación**: Navegación rápida por generaciones con identificador regional (Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar, Paldea).
 
-### 🎮 3. Selector de Cartuchos & ROM Hacks Populares
-Adapta las mecánicas, tipos y movimientos al juego exacto que estés jugando:
+### 3. Soporte para 17+ Cartuchos y ROM Hacks
+Ajusta la generación, mecánicas y lista de movimientos al juego activo:
 - **ROM Hacks Populares**: Radical Red, Emerald Rogue, Inclement Emerald, Pokémon Unbound, Renegade Platinum, Luminescent Platinum.
-- **Juegos Clásicos Organizados por Consola**:
+- **Clásicos por Plataforma**:
   - **GBA**: FireRed / LeafGreen, Emerald, Ruby / Sapphire.
   - **NDS**: HeartGold / SoulSilver, Platinum, Black / White, Black 2 / White 2.
   - **3DS**: X / Y, Omega Ruby / Alpha Sapphire, Sun / Moon, Ultra Sun / Ultra Moon.
   - **Switch**: Sword / Shield, Scarlet / Violet.
-- Barra de búsqueda y pestañas de filtrado rápido por consola.
+- Filtros por consola y buscador integrado en el selector de cartucho.
 
-### 💾 4. Gestor Multi-Equipos por ROM Hack / Partida
-- Crea y administra múltiples equipos para tus diferentes partidas y juegos.
-- Renombra tus equipos (ej. *"Radical Red - Hardcore"*, *"Emerald Rogue Nuzlocke"*, *"VGC Series"*).
-- Agrega, reemplaza y elimina slots con un solo toque.
-- Persistencia local automática en el almacenamiento de tu consola.
+### 4. Gestor Multi-Equipos por ROM Hack y Partida
+- Creación y administración de múltiples alineaciones independientes para diferentes partidas.
+- Opciones para renombrar, agregar, reemplazar y eliminar perfiles de equipo.
+- Persistencia automática en el almacenamiento local del dispositivo.
 
-### 📊 5. Personalización Competitiva de IVs, EVs & Naturalezas
-- **Editor Completo**: Ajusta IVs (0–31), EVs (0–252) y Naturalezas (+10% / -10% en estadísticas reales).
-- **Arquetipos Competitivos Predefinidos**: Carga con un click builds balanceadas de Smogon/VGC adaptadas al rol del Pokémon:
-  - *Defensive Wall* (252 HP / 252 Def)
-  - *Special Wall* (252 HP / 252 SpD)
-  - *Physical Sweeper* (252 Atk / 252 Spe)
-  - *Special Sweeper* (252 SpA / 252 Spe)
-  - *Bulky Offense* (252 HP / 252 Atk o SpA)
-
----
-
-## 📱 Instalación en AYN Thor / Android
-
-1. Descarga el archivo **`PokeThorAssistant.apk`** desde la sección de [Releases](https://github.com/Gbriel999/PokeThorAssistant/releases/latest).
-2. En tu AYN Thor, abre el explorador de archivos y pulsa sobre el APK descargado.
-3. Si el sistema te lo solicita, activa la opción **"Permitir la instalación de fuentes desconocidas"**.
-4. Pulsa en **Instalar**.
-5. ¡Listo! Abre **PokeThorAssistant** en la pantalla inferior táctil de tu AYN Thor mientras ejecutas tu emulador preferido en la pantalla principal.
+### 5. Editor Competitivo de IVs, EVs y Naturalezas
+- **Ajuste Manual**: Configuración precisa de IVs (0 a 31), EVs (0 a 252) y Naturalezas con recálculo exacto de estadísticas.
+- **Arquetipos Competitivos**: Perfiles predefinidos según el rol competitivo:
+  - Defensive Wall (252 HP / 252 Def)
+  - Special Wall (252 HP / 252 SpD)
+  - Physical Sweeper (252 Atk / 252 Spe)
+  - Special Sweeper (252 SpA / 252 Spe)
+  - Bulky Offense (252 HP / 252 Atk o SpA)
 
 ---
 
-## 💻 Ejecución en Desarrollo (Web / PC)
+## Instalación en AYN Thor / Android
 
-Si prefieres usar la herramienta en PC o compilarla tú mismo:
+1. Descarga el archivo `PokeThorAssistant.apk` desde [Releases](https://github.com/Gbriel999/PokeThorAssistant/releases/latest).
+2. En tu consola o dispositivo Android, abre el archivo descargado.
+3. Si el sistema lo solicita, habilita la opción de instalar aplicaciones desde fuentes desconocidas.
+4. Completa la instalación y ejecuta la aplicación en la pantalla inferior o en modo pantalla dividida.
+
+---
+
+## Entorno de Desarrollo (Web / PC)
+
+Para ejecutar la aplicación localmente en un navegador:
 
 ```bash
-# 1. Clonar el repositorio
+# Clonar el repositorio
 git clone https://github.com/Gbriel999/PokeThorAssistant.git
 cd PokeThorAssistant
 
-# 2. Instalar dependencias
+# Instalar dependencias
 npm install
 
-# 3. Iniciar el servidor local de desarrollo
+# Iniciar servidor de desarrollo
 npm run dev
 ```
 
-Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
+La aplicación estará disponible en `http://localhost:3000`.
 
-### Compilar APK localmente:
+### Compilación del APK
+
 ```bash
-# Generar build estático y sincronizar con Capacitor Android
+# Generar build estático y sincronizar plataforma Android
 npm run cap:sync
 
-# Compilar el APK con Gradle
+# Compilar el binario APK con Gradle
 cd android
 ./gradlew assembleDebug
 ```
-El archivo APK resultante se genera en: `android/app/build/outputs/apk/debug/app-debug.apk`.
+
+El binario compilado se ubica en: `android/app/build/outputs/apk/debug/app-debug.apk`.
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## Stack Tecnológico
 
-- **Framework**: [Next.js 16](https://nextjs.org/) (App Router, Turbopack, Static Export)
-- **UI & Estilos**: [React 19](https://react.dev/), [Tailwind CSS v4](https://tailwindcss.com/), [Lucide Icons](https://lucide.dev/)
-- **Motor Pokémon**: [@pkmn/dex](https://github.com/pkmn/ps)
-- **Runtime Nativo Android**: [Capacitor 8](https://capacitorjs.com/)
+- **Framework**: Next.js 16 (App Router, Turbopack, Static Export)
+- **Interfaz**: React 19, Tailwind CSS v4, Lucide Icons
+- **Motor de Datos**: @pkmn/dex
+- **Contenedor Android**: Capacitor 8
 
 ---
 
-## 📄 Licencia
+## Licencia
 
-Este proyecto está bajo la licencia [MIT](LICENSE). Pokémon y los nombres de los personajes son marcas registradas de Nintendo, Creatures Inc. y Game Freak. PokeThorAssistant es una herramienta sin fines de lucro creada por y para la comunidad.
+Distribuido bajo licencia [MIT](LICENSE). Pokémon y los nombres de personajes y criaturas son marcas registradas de Nintendo, Creatures Inc. y Game Freak. Este proyecto es una herramienta independiente y sin fines de lucro.
