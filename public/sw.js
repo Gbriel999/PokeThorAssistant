@@ -1,5 +1,5 @@
-// Service Worker for Silph Pocket Dex (AYN Thor offline-first cache)
-const CACHE_NAME = 'silph-dex-cache-v1'
+// Service Worker for PokeThor Assistant (AYN Thor offline-first cache)
+const CACHE_NAME = 'pokethor-cache-v1'
 
 const ASSETS_TO_CACHE = [
   '/',

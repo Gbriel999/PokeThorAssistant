@@ -38,9 +38,8 @@ export function TopBar({
         <span aria-hidden className="size-1.5 rounded-full bg-[#3DDC6B]" />
       </div>
 
-      <div className="flex min-w-0 items-baseline gap-2">
-        <span className="font-mono text-2xs font-extrabold tracking-[0.2em] text-white">PokeThor</span>
-        <span className="font-mono text-3xs tracking-[0.18em] text-white/40">Assistant</span>
+      <div className="flex min-w-0 items-baseline gap-1.5">
+        <span className="font-mono text-2xs font-extrabold tracking-[0.18em] text-white">PokeThor Assistant</span>
       </div>
 
       <div className="ml-auto flex items-center gap-2">
