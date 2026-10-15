@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production & Build outputs
+.next/
+out/
+build/
+dist/
+
+# Android build artifacts & local properties
+.gradle/
+android/.gradle/
+android/app/build/
+android/local.properties
+android/**/build/
+android/capacitor-cordova-android-plugins/build/
+
+# Release binary (distributed via GitHub Releases)
+release/
+
+# Environment & credentials
+.env*.local
+.env
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System & IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Internal temporary sandbox files
+__v0_*
+.snowflake/
+.design-cache/
+.v0-trash/
+.vercel/
+.superpowers/
