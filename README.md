@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 # PokeThorAssistant
 ### Tactical Pokédex & Real-Time Battle Scout for AYN Thor & Dual-Screen Handhelds
@@ -26,7 +26,7 @@
 
 La versión compilada lista para instalar en consolas AYN Thor y dispositivos Android se encuentra disponible en releases:
 
-- **[Descargar PokeThorAssistant.apk (v1.0.0)](https://github.com/Gbriel999/PokeThorAssistant/releases/latest/download/PokeThorAssistant.apk)**
+- **[Descargar PokeThorAssistant.apk (v1.1.0)](https://github.com/Gbriel999/PokeThorAssistant/releases/latest/download/PokeThorAssistant.apk)**
 
 ---
 
