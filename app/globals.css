@@ -271,8 +271,20 @@ body {
 .animate-alert { animation: alert-blink 0.9s steps(1, end) infinite; }
 .animate-caret { animation: caret 1s steps(1, end) infinite; }
 
+/* Dual-Screen Low-Power Optimization for AYN Thor:
+   When document is hidden, window is blurred (playing on top screen), or user is idle,
+   freeze continuous animations to save CPU, GPU, battery, and reduce thermal load. */
+:root.is-background *,
+:root.is-idle .animate-idle,
+:root.is-idle .animate-holo,
+:root.is-idle .animate-led,
+:root.is-idle .animate-alert,
+:root.is-idle .animate-caret {
+  animation-play-state: paused !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-led, .animate-idle, .animate-holo, .animate-bar, .animate-view, .animate-alert, .animate-caret {
-    animation: none;
+    animation: none !important;
   }
 }

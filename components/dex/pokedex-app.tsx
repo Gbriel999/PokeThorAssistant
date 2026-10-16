@@ -149,9 +149,65 @@ export function PokedexApp() {
     setPcKeys((prev) => (prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]))
   }, [])
 
+  // Low-power dual-screen optimization for AYN Thor:
+  // When top screen is focused or user is idle, freeze animations to conserve CPU, GPU, and battery.
+  useEffect(() => {
+    let idleTimer: ReturnType<typeof setTimeout> | null = null
+
+    const setBackground = (isBg: boolean) => {
+      document.documentElement.classList.toggle('is-background', isBg)
+    }
+
+    const resetIdle = () => {
+      document.documentElement.classList.remove('is-idle')
+      if (idleTimer) clearTimeout(idleTimer)
+      idleTimer = setTimeout(() => {
+        document.documentElement.classList.add('is-idle')
+      }, 20000)
+    }
+
+    const handleVisibility = () => {
+      setBackground(document.hidden)
+      if (!document.hidden) resetIdle()
+    }
+
+    const handleBlur = () => {
+      setBackground(true)
+    }
+
+    const handleFocus = () => {
+      setBackground(false)
+      resetIdle()
+    }
+
+    document.addEventListener('visibilitychange', handleVisibility)
+    window.addEventListener('blur', handleBlur)
+    window.addEventListener('focus', handleFocus)
+    window.addEventListener('pointerdown', resetIdle, { passive: true })
+    window.addEventListener('keydown', resetIdle, { passive: true })
+
+    resetIdle()
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibility)
+      window.removeEventListener('blur', handleBlur)
+      window.removeEventListener('focus', handleFocus)
+      window.removeEventListener('pointerdown', resetIdle)
+      window.removeEventListener('keydown', resetIdle)
+      if (idleTimer) clearTimeout(idleTimer)
+      document.documentElement.classList.remove('is-background', 'is-idle')
+    }
+  }, [])
+
   const removeFromTeam = (key: string) => setTeam((prev) => prev.map((k) => (k === key ? null : k)))
 
   const cycle = (dir: 1 | -1) => {
+    if (mode === 'rival') {
+      const idx = POKEDEX.findIndex((p) => p.key === rivalKey)
+      if (idx === -1) return
+      setRivalKey(POKEDEX[(idx + dir + POKEDEX.length) % POKEDEX.length].key)
+      return
+    }
     const pool = inTeam ? teamMembers.map((p) => p.key) : POKEDEX.map((p) => p.key)
     const idx = pool.indexOf(currentKey)
     select(pool[(idx + dir + pool.length) % pool.length])
@@ -229,7 +285,7 @@ export function PokedexApp() {
           <RightDock
             inTeam={inTeam}
             teamFull={teamFull}
-            onSearch={() => setDrawer('search')}
+            onSearch={() => setDrawer(mode === 'rival' ? 'rival' : 'search')}
             onPrev={() => cycle(-1)}
             onNext={() => cycle(1)}
             onToggleTeam={toggleTeam}
@@ -245,6 +301,7 @@ export function PokedexApp() {
 
         <SearchDrawer
           open={drawer === 'search' || drawer === 'rival'}
+          title={drawer === 'rival' ? 'RIVAL EN PISTA' : 'DEX LOCAL'}
           game={game}
           pcKeys={pcKeys}
           onTogglePc={togglePc}

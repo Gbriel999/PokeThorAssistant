@@ -64,13 +64,22 @@ export function RivalView({
             <span>Nº{String(rival.dex).padStart(3, '0')}</span>
           </div>
 
-          <div className="scanlines -mx-2 mt-1 flex flex-1 items-end justify-center min-h-0 overflow-hidden">
-            <SpriteStage key={rival.slug} slug={rival.slug} name={rival.name} dex={rival.dex} />
-          </div>
+          <div
+            onClick={onOpenRivalSearch}
+            className="cursor-pointer group flex flex-col flex-1 min-h-0"
+            title="Toca para cambiar de rival"
+          >
+            <div className="scanlines -mx-2 mt-1 flex flex-1 items-end justify-center min-h-0 overflow-hidden">
+              <SpriteStage key={rival.slug} slug={rival.slug} name={rival.name} dex={rival.dex} />
+            </div>
 
-          <h1 className="mt-1 truncate text-base font-extrabold uppercase leading-none tracking-wide text-white">
-            {rival.name}
-          </h1>
+            <div className="mt-1 flex items-center justify-between">
+              <h1 className="truncate text-base font-extrabold uppercase leading-none tracking-wide text-white group-hover:text-(--acc) transition-colors">
+                {rival.name}
+              </h1>
+              <span className="font-mono text-3xs text-white/40 group-hover:text-white">CAMBIAR ⌕</span>
+            </div>
+          </div>
 
           <div className="mt-1 flex flex-wrap gap-1">
             {rivalTypes.map((t) => (
