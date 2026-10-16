@@ -44,7 +44,7 @@ export function RivalView({
         <Panel
           className="flex-1 min-h-0 min-w-0 overflow-hidden"
           bodyClassName="px-2 pb-2 pt-1.5"
-          headerRight={
+          aside={
             <button
               type="button"
               onClick={onOpenRivalSearch}
@@ -64,8 +64,8 @@ export function RivalView({
             <span>Nº{String(rival.dex).padStart(3, '0')}</span>
           </div>
 
-          <div className="scanlines -mx-2 mt-1 flex flex-1 items-end justify-center min-h-0">
-            <SpriteStage key={rival.slug} slug={rival.slug} name={rival.name} dex={rival.dex} zoom={1.75} />
+          <div className="scanlines -mx-2 mt-1 flex flex-1 items-end justify-center min-h-0 overflow-hidden">
+            <SpriteStage key={rival.slug} slug={rival.slug} name={rival.name} dex={rival.dex} />
           </div>
 
           <h1 className="mt-1 truncate text-base font-extrabold uppercase leading-none tracking-wide text-white">
@@ -119,7 +119,7 @@ export function RivalView({
         <Panel
           className="flex-1 min-h-0 min-w-0 overflow-hidden"
           title="Quién debe pelear (Tu Equipo)"
-          headerRight={
+          aside={
             <span className="font-mono text-3xs text-white/45">
               {teamRankings.length} Pokémon listos
             </span>

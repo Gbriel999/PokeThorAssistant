@@ -93,7 +93,7 @@ export function CartridgeDrawer({
                 { id: '3DS', label: '3DS' },
                 { id: 'Switch', label: 'SWITCH' },
               ] as const
-            ).map(({ id, label, icon }) => (
+            ).map(({ id, label }) => (
               <button
                 key={id}
                 type="button"

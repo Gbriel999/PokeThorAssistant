@@ -46,7 +46,7 @@ export function SpriteStage({
   }
 
   return (
-    <div className={cn('relative flex items-end justify-center', lg ? 'h-[7.5rem]' : 'h-16', className)}>
+    <div className={cn('relative flex items-end justify-center overflow-hidden', lg ? 'h-[7.25rem] w-full' : 'h-16', className)}>
       <div
         aria-hidden
         className={cn('animate-holo absolute bottom-0 rounded-[50%] border', lg ? 'h-6 w-36' : 'h-3.5 w-16')}
@@ -63,7 +63,10 @@ export function SpriteStage({
           style={{ borderColor: 'color-mix(in srgb, var(--led) 50%, transparent)' }}
         />
       ) : null}
-      <div className={cn('relative origin-bottom', lg && zoom > 1 && 'mb-1')} style={{ transform: zoom > 1 ? `scale(${zoom})` : undefined }}>
+      <div
+        className={cn('relative flex items-end justify-center origin-bottom', lg && zoom > 1 && 'mb-1')}
+        style={{ transform: zoom > 1 ? `scale(${zoom})` : undefined }}
+      >
         {candidateUrl ? (
           <img
             key={`${slug}-${attempt}`}
@@ -73,7 +76,7 @@ export function SpriteStage({
             draggable={false}
             className={cn(
               'pixelated relative object-contain object-bottom',
-              lg ? 'animate-idle mb-2 max-h-[7rem] max-w-[10rem]' : 'mb-1 max-h-14 max-w-20',
+              lg ? 'animate-idle mb-1 max-h-[6.25rem] max-w-[9.75rem]' : 'mb-1 max-h-14 max-w-20',
               dim && 'opacity-45 grayscale',
             )}
           />

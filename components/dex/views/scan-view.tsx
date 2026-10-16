@@ -76,8 +76,8 @@ export function ScanView({
               ) : null}
             </div>
           </div>
-          <div className="scanlines -mx-2.5 mt-1 flex flex-1 items-end justify-center">
-            <SpriteStage slug={pokemon.slug} name={pokemon.name} dex={pokemon.dex} zoom={2} />
+          <div className="scanlines relative -mx-2.5 mt-1 flex flex-1 items-end justify-center overflow-hidden">
+            <SpriteStage slug={pokemon.slug} name={pokemon.name} dex={pokemon.dex} />
           </div>
           <h1 className="mt-1 truncate text-xl font-extrabold uppercase leading-none tracking-wide">{pokemon.name}</h1>
           <div className="mt-1.5 flex flex-wrap gap-1">

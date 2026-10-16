@@ -192,7 +192,8 @@ export function SearchDrawer({
                   ) : null}
                   <img
                     src={boxIconUrl(p.iconId)}
-                    alt=""
+                    alt={p.name}
+                    loading="lazy"
                     draggable={false}
                     className="pixelated h-[1.875rem] w-10 object-contain"
                   />

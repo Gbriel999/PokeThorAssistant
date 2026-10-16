@@ -784,10 +784,8 @@ export const DEX_BY_KEY: Record<string, Pokemon> = Object.fromEntries(POKEDEX.ma
 
 export const aniSpriteUrl = (slug: string) => `https://play.pokemonshowdown.com/sprites/ani/${slug}.gif`
 export const boxIconUrl = (id: number) => {
-  if (id <= 898) {
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/${id}.png`
-  }
-  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+  const safeId = Math.max(1, id || 1)
+  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${safeId}.png`
 }
 export const itemSpriteUrl = (id: string) =>
   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${id}.png`
