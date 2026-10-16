@@ -1,6 +1,6 @@
 {
   "name": "pokethorassistant",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Tactical Pokédex and Real-Time Battle Advisor for AYN Thor & Dual-Screen Handhelds",
   "private": true,
   "packageManager": "pnpm@12.3.4",
