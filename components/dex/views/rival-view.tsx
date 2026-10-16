@@ -70,7 +70,7 @@ export function RivalView({
             title="Toca para cambiar de rival"
           >
             <div className="scanlines -mx-2 mt-1 flex flex-1 items-end justify-center min-h-0 overflow-hidden">
-              <SpriteStage key={rival.slug} slug={rival.slug} name={rival.name} dex={rival.dex} />
+              <SpriteStage key={rival.slug} slug={rival.slug} name={rival.name} dex={rival.dex} zoom={2} />
             </div>
 
             <div className="mt-1 flex items-center justify-between">

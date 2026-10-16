@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { aniSpriteUrl, boxIconUrl } from '@/lib/dex/pokemon'
 import { cn } from '@/lib/utils'
 
@@ -11,7 +11,7 @@ export function SpriteStage({
   className,
   size = 'lg',
   dim = false,
-  zoom = 1,
+  zoom,
 }: {
   slug: string
   name: string
@@ -22,11 +22,43 @@ export function SpriteStage({
   zoom?: number
 }) {
   const lg = size === 'lg'
+  const targetZoom = zoom ?? (lg ? 2 : 1)
   const [attempt, setAttempt] = useState(0)
+  const [scale, setScale] = useState<number>(targetZoom)
+  const imgRef = useRef<HTMLImageElement>(null)
+
+  const updateScale = useCallback(
+    (img: HTMLImageElement | null) => {
+      if (!img) return
+      const nw = img.naturalWidth
+      const nh = img.naturalHeight
+      if (!nw || !nh) return
+
+      // Max allowable dimensions inside the stage (pixels)
+      // Large stage: up to 120px tall, 155px wide (fits comfortably on the pedestal without overflowing)
+      // Small stage: up to 54px tall, 76px wide
+      const maxH = lg ? 120 : 54
+      const maxW = lg ? 155 : 76
+
+      const scaleH = maxH / nh
+      const scaleW = maxW / nw
+
+      // Small/medium Pokemon keep their full targetZoom (e.g. 2x).
+      // Large/wide Pokemon (Garchomp, Steelix, Lucario, Gyarados, etc.) are clamped so they fit perfectly.
+      const clamped = Math.min(targetZoom, scaleH, scaleW)
+      setScale(Number(clamped.toFixed(3)))
+    },
+    [lg, targetZoom],
+  )
 
   useEffect(() => {
     setAttempt(0)
-  }, [slug])
+    if (imgRef.current && imgRef.current.complete && imgRef.current.naturalWidth > 0) {
+      updateScale(imgRef.current)
+    } else {
+      setScale(targetZoom)
+    }
+  }, [slug, targetZoom, updateScale])
 
   // Candidate image URLs in fallback order:
   // 0: Animated Showdown GIF
@@ -46,7 +78,13 @@ export function SpriteStage({
   }
 
   return (
-    <div className={cn('relative flex items-end justify-center overflow-hidden', lg ? 'h-[7.25rem] w-full' : 'h-16', className)}>
+    <div
+      className={cn(
+        'relative flex items-end justify-center overflow-hidden',
+        lg ? 'h-[7.75rem] w-full' : 'h-16',
+        className,
+      )}
+    >
       <div
         aria-hidden
         className={cn('animate-holo absolute bottom-0 rounded-[50%] border', lg ? 'h-6 w-36' : 'h-3.5 w-16')}
@@ -64,19 +102,24 @@ export function SpriteStage({
         />
       ) : null}
       <div
-        className={cn('relative flex items-end justify-center origin-bottom', lg && zoom > 1 && 'mb-1')}
-        style={{ transform: zoom > 1 ? `scale(${zoom})` : undefined }}
+        className={cn('relative flex items-end justify-center origin-bottom', lg && targetZoom > 1 && 'mb-1')}
+        style={{
+          transform: scale !== 1 ? `scale(${scale})` : undefined,
+          transformOrigin: 'bottom center',
+        }}
       >
         {candidateUrl ? (
           <img
+            ref={imgRef}
             key={`${slug}-${attempt}`}
             src={candidateUrl}
             alt={name}
+            onLoad={(e) => updateScale(e.currentTarget)}
             onError={handleError}
             draggable={false}
             className={cn(
               'pixelated relative object-contain object-bottom',
-              lg ? 'animate-idle mb-1 max-h-[6.25rem] max-w-[9.75rem]' : 'mb-1 max-h-14 max-w-20',
+              lg ? 'animate-idle mb-1' : 'mb-1',
               dim && 'opacity-45 grayscale',
             )}
           />
