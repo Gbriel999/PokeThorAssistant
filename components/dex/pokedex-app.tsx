@@ -149,40 +149,25 @@ export function PokedexApp() {
     setPcKeys((prev) => (prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]))
   }, [])
 
-  // Low-power dual-screen optimization for AYN Thor:
-  // When top screen is focused or user is idle, freeze animations to conserve CPU, GPU, and battery.
+  // Low-power optimization for AYN Thor:
+  // When app is minimized/hidden in background or idle, pause heavy looping animations.
   useEffect(() => {
     let idleTimer: ReturnType<typeof setTimeout> | null = null
-
-    const setBackground = (isBg: boolean) => {
-      document.documentElement.classList.toggle('is-background', isBg)
-    }
 
     const resetIdle = () => {
       document.documentElement.classList.remove('is-idle')
       if (idleTimer) clearTimeout(idleTimer)
       idleTimer = setTimeout(() => {
         document.documentElement.classList.add('is-idle')
-      }, 20000)
+      }, 30000)
     }
 
     const handleVisibility = () => {
-      setBackground(document.hidden)
+      document.documentElement.classList.toggle('is-background', document.hidden)
       if (!document.hidden) resetIdle()
     }
 
-    const handleBlur = () => {
-      setBackground(true)
-    }
-
-    const handleFocus = () => {
-      setBackground(false)
-      resetIdle()
-    }
-
     document.addEventListener('visibilitychange', handleVisibility)
-    window.addEventListener('blur', handleBlur)
-    window.addEventListener('focus', handleFocus)
     window.addEventListener('pointerdown', resetIdle, { passive: true })
     window.addEventListener('keydown', resetIdle, { passive: true })
 
@@ -190,8 +175,6 @@ export function PokedexApp() {
 
     return () => {
       document.removeEventListener('visibilitychange', handleVisibility)
-      window.removeEventListener('blur', handleBlur)
-      window.removeEventListener('focus', handleFocus)
       window.removeEventListener('pointerdown', resetIdle)
       window.removeEventListener('keydown', resetIdle)
       if (idleTimer) clearTimeout(idleTimer)

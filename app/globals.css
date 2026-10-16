@@ -274,7 +274,11 @@ body {
 /* Dual-Screen Low-Power Optimization for AYN Thor:
    When document is hidden, window is blurred (playing on top screen), or user is idle,
    freeze continuous animations to save CPU, GPU, battery, and reduce thermal load. */
-:root.is-background *,
+:root.is-background .animate-idle,
+:root.is-background .animate-holo,
+:root.is-background .animate-led,
+:root.is-background .animate-alert,
+:root.is-background .animate-caret,
 :root.is-idle .animate-idle,
 :root.is-idle .animate-holo,
 :root.is-idle .animate-led,

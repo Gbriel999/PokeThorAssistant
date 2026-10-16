@@ -84,10 +84,9 @@ export function SearchDrawer({
         aria-modal="true"
         aria-label={title}
         aria-hidden={!open}
-        inert={!open}
         className={cn(
           'absolute inset-y-0 right-0 z-30 flex w-[25rem] flex-col gap-1.5 border-l-2 border-black bg-shell-2 p-2 transition-transform duration-150 ease-snap will-change-transform min-w-0 overflow-hidden',
-          open ? 'translate-x-0' : 'translate-x-full',
+          open ? 'translate-x-0 pointer-events-auto' : 'translate-x-full pointer-events-none',
         )}
       >
         {/* Header bar */}

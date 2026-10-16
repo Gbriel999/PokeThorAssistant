@@ -58,10 +58,9 @@ export function CartridgeDrawer({
         aria-modal="true"
         aria-label="Seleccionar cartucho"
         aria-hidden={!open}
-        inert={!open}
         className={cn(
           'absolute inset-x-0 top-0 z-30 flex max-h-[92%] flex-col gap-2 border-b-2 border-black bg-shell-2 p-2 pb-3 transition-transform duration-150 ease-snap will-change-transform',
-          open ? 'translate-y-0' : '-translate-y-full',
+          open ? 'translate-y-0 pointer-events-auto' : '-translate-y-full pointer-events-none',
         )}
       >
         {/* HEADER BAR */}
