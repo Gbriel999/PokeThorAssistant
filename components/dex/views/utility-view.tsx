@@ -1,12 +1,66 @@
-import { ChevronRight, Star } from 'lucide-react'
-import { Fragment } from 'react'
+import { ChevronRight, Download, Star, WifiOff } from 'lucide-react'
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import type { Game } from '@/lib/dex/games'
 import { CATEGORY_META, categoryForGen, MOVES } from '@/lib/dex/moves'
-import { itemSpriteUrl, type Pokemon } from '@/lib/dex/pokemon'
+import { boxIconUrl, itemSpriteUrl, POKEDEX, type Pokemon } from '@/lib/dex/pokemon'
 import { cn } from '@/lib/utils'
 import { Panel } from '../panel'
 import { SpriteStage } from '../sprite-stage'
 import { TypeIcon } from '../type-badge'
+
+function useOfflineDownload() {
+  const [state, setState] = useState<'idle' | 'downloading' | 'done' | 'error'>('idle')
+  const [progress, setProgress] = useState({ cached: 0, skipped: 0, total: 0 })
+  const listenerRef = useRef<((e: MessageEvent) => void) | null>(null)
+
+  const cleanup = useCallback(() => {
+    if (listenerRef.current) {
+      navigator.serviceWorker?.removeEventListener('message', listenerRef.current)
+      listenerRef.current = null
+    }
+  }, [])
+
+  useEffect(() => cleanup, [cleanup])
+
+  const start = useCallback(async () => {
+    if (!('serviceWorker' in navigator)) {
+      setState('error')
+      return
+    }
+
+    const reg = await navigator.serviceWorker.ready
+    if (!reg.active) {
+      setState('error')
+      return
+    }
+
+    // Build URL list: box icons for all 1025 pokemon
+    const urls: string[] = []
+    for (const p of POKEDEX) {
+      urls.push(boxIconUrl(p.iconId))
+    }
+
+    setState('downloading')
+    setProgress({ cached: 0, skipped: 0, total: urls.length })
+
+    cleanup()
+    const handler = (e: MessageEvent) => {
+      if (e.data?.type === 'precacheProgress') {
+        setProgress({ cached: e.data.cached, skipped: e.data.skipped, total: e.data.total })
+        if (e.data.done) {
+          setState('done')
+          cleanup()
+        }
+      }
+    }
+    listenerRef.current = handler
+    navigator.serviceWorker.addEventListener('message', handler)
+
+    reg.active.postMessage({ type: 'precacheSprites', urls })
+  }, [cleanup])
+
+  return { state, progress, start }
+}
 
 export function UtilityView({
   pokemon,
@@ -17,9 +71,14 @@ export function UtilityView({
   game: Game
   onSelect: (key: string) => void
 }) {
+  const offline = useOfflineDownload()
+  const pct = offline.progress.total > 0
+    ? Math.round(((offline.progress.cached + offline.progress.skipped) / offline.progress.total) * 100)
+    : 0
+
   return (
     <div className="flex h-full flex-col gap-1.5">
-      <Panel title="Línea evolutiva" bodyClassName="flex-row items-center justify-center gap-1 px-2 py-1.5">
+      <Panel title="Linea evolutiva" bodyClassName="flex-row items-center justify-center gap-1 px-2 py-1.5">
         {pokemon.evolution.map((stage, si) => (
           <Fragment key={si}>
             {si > 0 ? (
@@ -99,6 +158,55 @@ export function UtilityView({
           )
         })}
       </Panel>
+
+      {/* Offline sprite download panel */}
+      <Panel
+        title="Sprites offline"
+        aside={
+          <span className="flex items-center gap-1 font-mono text-3xs text-white/45">
+            <WifiOff className="size-3" aria-hidden />
+            Jugar sin internet
+          </span>
+        }
+        bodyClassName="flex-row items-center gap-2 px-2 py-1.5"
+      >
+        {offline.state === 'idle' && (
+          <button
+            type="button"
+            onClick={offline.start}
+            className="press chamfer-sm flex h-9 flex-1 items-center justify-center gap-2 border-t border-t-white/20 bg-[#123321] font-mono text-xs font-extrabold text-[#7dffa8]"
+          >
+            <Download className="size-4" aria-hidden />
+            DESCARGAR ICONOS ({POKEDEX.length} sprites)
+          </button>
+        )}
+        {offline.state === 'downloading' && (
+          <div className="flex flex-1 flex-col gap-1">
+            <div className="flex items-center justify-between font-mono text-2xs font-bold">
+              <span className="text-[#7dffa8]">Descargando...</span>
+              <span className="text-white/60">{pct}%</span>
+            </div>
+            <div className="relative h-2.5 w-full overflow-hidden rounded-sm bg-black/70">
+              <div
+                className="h-full bg-[#7dffa8] transition-all duration-200"
+                style={{ width: `${pct}%` }}
+              />
+            </div>
+          </div>
+        )}
+        {offline.state === 'done' && (
+          <div className="flex flex-1 items-center justify-center gap-2 font-mono text-xs font-extrabold text-[#7dffa8]">
+            <WifiOff className="size-4" aria-hidden />
+            {offline.progress.cached} nuevos · {offline.progress.skipped} ya en cache
+          </div>
+        )}
+        {offline.state === 'error' && (
+          <div className="flex flex-1 items-center justify-center gap-2 font-mono text-xs font-extrabold text-[#ff8a80]">
+            Service Worker no disponible
+          </div>
+        )}
+      </Panel>
     </div>
   )
 }
+

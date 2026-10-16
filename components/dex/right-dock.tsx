@@ -20,7 +20,7 @@ export function RightDock({
   const base =
     'press chamfer-sm flex flex-col items-center justify-center gap-0.5 border-t border-t-white/10 bg-[#22242c] text-white/80'
   return (
-    <nav aria-label="Controles" className="flex w-16 shrink-0 flex-col gap-1.5 border-l-2 border-black bg-shell-2 p-1.5 pb-2">
+    <nav aria-label="Controles" className="flex w-[4.5rem] shrink-0 flex-col gap-1.5 border-l-2 border-black bg-shell-2 p-1.5 pb-2">
       <button type="button" onClick={onSearch} className={cn(base, 'flex-[1.4] border-t-white/40 bg-(--acc) text-black')}>
         <Search className="size-5" strokeWidth={2.5} aria-hidden />
         <span className="font-mono text-2xs font-extrabold tracking-wider">BUSCAR</span>

@@ -16,7 +16,7 @@ export function PartyDock({
   return (
     <nav
       aria-label="Equipo"
-      className="flex h-14 shrink-0 items-center gap-1.5 border-t-2 border-black bg-shell-2 px-1.5 pb-1 pt-1"
+      className="flex h-[3.75rem] shrink-0 items-center gap-1.5 border-t-2 border-black bg-shell-2 px-1.5 pb-1 pt-1"
     >
       <div className="flex w-[3.25rem] shrink-0 flex-col items-center leading-none">
         <span className="font-mono text-3xs tracking-[0.2em] text-white/40">PARTY</span>
@@ -36,7 +36,7 @@ export function PartyDock({
             aria-label={p ? `Slot ${i + 1}: ${p.name}` : `Slot ${i + 1} vacío, buscar Pokémon`}
             aria-current={active ? 'true' : undefined}
             className={cn(
-              'press relative flex h-11 flex-1 items-center gap-1 overflow-hidden rounded-full border-t pl-0.5 pr-2',
+              'press relative flex h-12 flex-1 items-center gap-1 overflow-hidden rounded-full border-t pl-0.5 pr-2',
               active ? 'border-t-white/40 bg-(--acc)' : 'border-t-white/10 bg-[#1d1f26]',
             )}
           >

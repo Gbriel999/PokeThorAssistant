@@ -166,7 +166,7 @@ export function PokedexApp() {
     <div className="fixed inset-0 grid place-items-center bg-black">
       <div
         style={style}
-        className="relative flex aspect-[31/27] h-[33.75rem] w-[38.75rem] select-none flex-col overflow-hidden bg-amoled text-white"
+        className="relative flex aspect-[31/27] h-[30.5rem] w-[35rem] select-none flex-col overflow-hidden bg-amoled text-white"
       >
         <TopBar game={game} pokemon={pokemon} mode={mode} onOpenCartridge={() => setDrawer('cart')} />
 

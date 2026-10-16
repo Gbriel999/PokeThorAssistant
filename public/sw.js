@@ -28,6 +28,73 @@ self.addEventListener('activate', (event) => {
   )
 })
 
+// Handle bulk pre-cache requests from the app
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'precacheSprites') {
+    const urls = event.data.urls || []
+    const clientId = event.source ? event.source.id : null
+
+    precacheBatch(urls, clientId).catch(() => {})
+  }
+})
+
+async function precacheBatch(urls, clientId) {
+  const cache = await caches.open(CACHE_NAME)
+  const BATCH_SIZE = 12
+  let cached = 0
+  let skipped = 0
+  const total = urls.length
+
+  for (let i = 0; i < total; i += BATCH_SIZE) {
+    const batch = urls.slice(i, i + BATCH_SIZE)
+    const promises = batch.map(async (url) => {
+      try {
+        const existing = await cache.match(url)
+        if (existing) {
+          skipped++
+          return
+        }
+        const response = await fetch(url, { mode: 'cors' })
+        if (response && response.status === 200) {
+          await cache.put(url, response)
+          cached++
+        }
+      } catch (_) {
+        // Skip failed fetches silently
+      }
+    })
+    await Promise.all(promises)
+
+    // Report progress back to the client
+    if (clientId) {
+      const client = await self.clients.get(clientId)
+      if (client) {
+        client.postMessage({
+          type: 'precacheProgress',
+          cached,
+          skipped,
+          total,
+          done: (cached + skipped) >= total || (i + BATCH_SIZE) >= total,
+        })
+      }
+    }
+  }
+
+  // Final done message
+  if (clientId) {
+    const client = await self.clients.get(clientId)
+    if (client) {
+      client.postMessage({
+        type: 'precacheProgress',
+        cached,
+        skipped,
+        total,
+        done: true,
+      })
+    }
+  }
+}
+
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url)
 

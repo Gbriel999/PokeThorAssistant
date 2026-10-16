@@ -177,9 +177,11 @@
   --color-shell-2: #16171e;
 }
 
-/* 1rem = 16 design px of the 620x540 (31:27) canvas, scaled to fit any viewport (1240x1080 on device). */
+/* 1rem = 16 design px scaled to fit the viewport.
+   Divisors 35 / 30.5 (~10% larger than 38.75 / 33.75) produce fatter touch
+   targets on the AYN Thor 1240×1080 bottom screen without breaking the layout. */
 html {
-  font-size: min(calc(100vw / 38.75), calc(100dvh / 33.75));
+  font-size: min(calc(100vw / 35), calc(100dvh / 30.5));
   background: #000;
   -webkit-tap-highlight-color: transparent;
 }

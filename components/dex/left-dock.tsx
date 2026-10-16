@@ -13,7 +13,7 @@ const MODES: { id: Mode; label: string; sub: string; Icon: typeof Radar }[] = [
 
 export function LeftDock({ mode, onChange }: { mode: Mode; onChange: (m: Mode) => void }) {
   return (
-    <nav aria-label="Modos" className="flex w-16 shrink-0 flex-col gap-1 border-r-2 border-black bg-shell-2 p-1 pb-1.5">
+    <nav aria-label="Modos" className="flex w-[4.5rem] shrink-0 flex-col gap-1 border-r-2 border-black bg-shell-2 p-1 pb-1.5">
       {MODES.map(({ id, label, sub, Icon }) => {
         const active = id === mode
         return (

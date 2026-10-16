@@ -10,7 +10,8 @@ import { typesForGen, type PokeType } from '@/lib/dex/types'
 import { cn } from '@/lib/utils'
 import { TypeIcon } from './type-badge'
 
-const ROWS = ['ABCDEFGHI', 'JKLMNOPQR', 'STUVWXYZ-']
+/* 6-column ABC layout: wider keys, much easier to tap on the Thor screen */
+const ROWS = ['ABCDEF', 'GHIJKL', 'MNOPQR', 'STUVWX', 'YZ-']
 
 const normalize = (s: string) =>
   s
@@ -72,7 +73,7 @@ export function SearchDrawer({
         aria-hidden={!open}
         inert={!open}
         className={cn(
-          'absolute inset-y-0 right-0 z-30 flex w-[27rem] flex-col gap-1.5 border-l-2 border-black bg-shell-2 p-2 transition-transform duration-150 ease-snap will-change-transform',
+          'absolute inset-y-0 right-0 z-30 flex w-[24.5rem] flex-col gap-1.5 border-l-2 border-black bg-shell-2 p-2 transition-transform duration-150 ease-snap will-change-transform',
           open ? 'translate-x-0' : 'translate-x-full',
         )}
       >
@@ -86,13 +87,13 @@ export function SearchDrawer({
             }}
             aria-pressed={onlyPc}
             className={cn(
-              'press chamfer-sm px-1.5 h-7 font-mono text-3xs font-extrabold uppercase transition-colors',
+              'press chamfer-sm px-1.5 h-8 font-mono text-3xs font-extrabold uppercase transition-colors',
               onlyPc ? 'bg-(--acc) text-black' : 'bg-black/60 text-white/50 border border-white/10',
             )}
           >
             {onlyPc ? `✓ PC (${pcKeys.length})` : `PC (${pcKeys.length})`}
           </button>
-          <div className="chamfer-sm scanlines flex h-8 flex-1 items-center gap-1 bg-black px-2 font-mono text-base font-bold tracking-[0.2em] text-[#7dffa8]">
+          <div className="chamfer-sm scanlines flex h-9 flex-1 items-center gap-1 bg-black px-2 font-mono text-base font-bold tracking-[0.2em] text-[#7dffa8]">
             <span className="truncate">{query || <span className="text-[#7dffa8]/30">NOMBRE…</span>}</span>
             <span aria-hidden className="animate-caret h-4 w-2 bg-[#7dffa8]" />
             <span className="ml-auto text-2xs tracking-normal text-[#7dffa8]/60">
@@ -103,7 +104,7 @@ export function SearchDrawer({
             type="button"
             onClick={onClose}
             aria-label="Cerrar buscador"
-            className="press chamfer-sm grid h-8 w-12 place-items-center border-t border-t-white/10 bg-[#3a1418] text-[#ff8a80]"
+            className="press chamfer-sm grid h-9 w-12 place-items-center border-t border-t-white/10 bg-[#3a1418] text-[#ff8a80]"
           >
             <X className="size-5" strokeWidth={3} aria-hidden />
           </button>
@@ -123,7 +124,7 @@ export function SearchDrawer({
                 }}
                 title={`Gen ${insignia.gen} (${insignia.name})`}
                 className={cn(
-                  'press chamfer-sm relative flex h-7 items-center justify-center gap-1 border-t px-0.5 transition-transform duration-150 ease-snap active:scale-90',
+                  'press chamfer-sm relative flex h-8 items-center justify-center gap-1 border-t px-0.5 transition-transform duration-150 ease-snap active:scale-90',
                   active
                     ? 'border-t-white/40 bg-(--acc) text-black font-black shadow-sm'
                     : 'border-t-white/10 bg-[#1c1e24] text-white/70 hover:bg-[#252830]',
@@ -155,7 +156,7 @@ export function SearchDrawer({
                   setTypeFilter(active ? null : t)
                 }}
                 className={cn(
-                  'grid h-7 place-items-center rounded-sm transition-transform duration-150 ease-snap active:scale-90',
+                  'grid h-8 place-items-center rounded-sm transition-transform duration-150 ease-snap active:scale-90',
                   active ? 'bg-white/90' : 'bg-black/50',
                   typeFilter && !active && 'opacity-40',
                 )}
@@ -207,7 +208,7 @@ export function SearchDrawer({
               <button
                 type="button"
                 onClick={() => setDisplayLimit((prev) => Math.min(prev + 120, results.length))}
-                className="press chamfer-sm h-7 w-full border border-white/15 bg-black/60 font-mono text-3xs font-extrabold text-[#7dffa8] hover:bg-black/90"
+                className="press chamfer-sm h-8 w-full border border-white/15 bg-black/60 font-mono text-3xs font-extrabold text-[#7dffa8] hover:bg-black/90"
               >
                 MOSTRAR MÁS ({results.length - displayLimit} restantes)
               </button>
@@ -220,9 +221,10 @@ export function SearchDrawer({
           ) : null}
         </ul>
 
+        {/* 6-column keyboard — larger keys for comfortable tapping */}
         <div role="group" aria-label="Teclado" className="flex flex-col gap-1">
           {ROWS.map((row) => (
-            <div key={row} className="grid grid-cols-9 gap-1">
+            <div key={row} className="grid grid-cols-6 gap-1">
               {row.split('').map((ch) => (
                 <button
                   key={ch}
@@ -231,18 +233,18 @@ export function SearchDrawer({
                     setDisplayLimit(60)
                     setQuery((q) => (q.length < 12 ? q + ch : q))
                   }}
-                  className="press h-8 rounded-sm border-t border-t-white/10 bg-[#2a2c35] font-mono text-sm font-bold text-white"
+                  className="press h-10 rounded-sm border-t border-t-white/10 bg-[#2a2c35] font-mono text-base font-bold text-white"
                 >
                   {ch}
                 </button>
               ))}
             </div>
           ))}
-          <div className="grid grid-cols-9 gap-1">
+          <div className="grid grid-cols-6 gap-1">
             <button
               type="button"
               onClick={reset}
-              className="press col-span-3 h-8 rounded-sm border-t border-t-white/10 bg-[#2a2c35] font-mono text-2xs font-bold tracking-widest text-white/70"
+              className="press col-span-2 h-10 rounded-sm border-t border-t-white/10 bg-[#2a2c35] font-mono text-2xs font-bold tracking-widest text-white/70"
             >
               LIMPIAR
             </button>
@@ -253,15 +255,15 @@ export function SearchDrawer({
                 setQuery((q) => q.slice(0, -1))
               }}
               aria-label="Borrar letra"
-              className="press col-span-3 grid h-8 place-items-center rounded-sm border-t border-t-white/10 bg-[#2a2c35] text-white/80"
+              className="press col-span-2 grid h-10 place-items-center rounded-sm border-t border-t-white/10 bg-[#2a2c35] text-white/80"
             >
-              <Delete className="size-4" aria-hidden />
+              <Delete className="size-5" aria-hidden />
             </button>
             <button
               type="button"
               disabled={results.length === 0}
               onClick={() => results[0] && onPick(results[0].key)}
-              className="press col-span-3 h-8 rounded-sm border-t border-t-white/40 bg-(--acc) font-mono text-2xs font-extrabold tracking-widest text-black disabled:opacity-40"
+              className="press col-span-2 h-10 rounded-sm border-t border-t-white/40 bg-(--acc) font-mono text-2xs font-extrabold tracking-widest text-black disabled:opacity-40"
             >
               OK · 1º
             </button>
@@ -271,3 +273,4 @@ export function SearchDrawer({
     </>
   )
 }
+
