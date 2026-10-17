@@ -54,8 +54,8 @@ export function ScanView({
   return (
     <div className="grid h-full grid-cols-[11.75rem_1fr] gap-1.5">
       <div className="flex min-h-0 flex-col gap-1.5">
-        <Panel className="flex-1" bodyClassName="px-2.5 pb-2 pt-1.5">
-          <div className="flex items-center justify-between font-mono text-3xs tracking-widest text-white/45">
+        <Panel className="flex-1 min-h-0" bodyClassName="px-2.5 pb-2 pt-1.5 min-h-0">
+          <div className="flex shrink-0 items-center justify-between font-mono text-3xs tracking-widest text-white/45">
             <span>
               Nº<span className="text-xs font-extrabold text-white">{String(pokemon.dex).padStart(3, '0')}</span>
             </span>
@@ -76,22 +76,24 @@ export function ScanView({
               ) : null}
             </div>
           </div>
-          <div className="scanlines relative -mx-2.5 mt-1 flex flex-1 items-end justify-center overflow-hidden">
-            <SpriteStage slug={pokemon.slug} name={pokemon.name} dex={pokemon.dex} zoom={2} />
+          <div className="scanlines relative -mx-2.5 mt-1 flex flex-1 min-h-0 items-end justify-center overflow-hidden">
+            <SpriteStage slug={pokemon.slug} name={pokemon.name} dex={pokemon.dex} />
           </div>
-          <h1 className="mt-1 truncate text-xl font-extrabold uppercase leading-none tracking-wide">{pokemon.name}</h1>
-          <div className="mt-1.5 flex flex-wrap gap-1">
+          <h1 className="mt-1 shrink-0 truncate text-xl font-extrabold uppercase leading-none tracking-wide">
+            {pokemon.name}
+          </h1>
+          <div className="mt-1.5 flex shrink-0 flex-wrap gap-1">
             {types.map((t) => (
               <TypeBadge key={t} type={t} />
             ))}
           </div>
         </Panel>
 
-        <Panel title="Habilidades" bodyClassName="gap-1 p-1.5">
+        <Panel title="Habilidades" className="shrink-0" bodyClassName="gap-1 p-1.5 max-h-[6.25rem] overflow-y-auto">
           {pokemon.abilities.map((a) => (
             <div
               key={a.name}
-              className={cn('chamfer-sm px-1.5 py-1', a.hidden ? 'bg-[#2a1f3d]' : 'bg-black/40')}
+              className={cn('chamfer-sm px-1.5 py-1 shrink-0', a.hidden ? 'bg-[#2a1f3d]' : 'bg-black/40')}
             >
               <div className="flex items-center gap-1">
                 <span className="truncate text-xs font-bold leading-tight">{a.name}</span>
